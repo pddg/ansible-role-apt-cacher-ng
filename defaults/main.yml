@@ -1,0 +1,22 @@
+---
+apt_cacher_server: no
+apt_cacher_client: yes
+
+apt_cacher_server_fqdn: localhost
+
+apt_cacher_debug: no
+
+apt_cacher_cache_dir: /var/cache/apt-cacher-ng
+apt_cacher_log_dir: /var/log/apt-cacher-ng
+apt_cacher_support_dir: /usr/lib/apt-cacher-ng
+apt_cacher_port: 3142
+
+apt_cacher_expire_threshold: 4
+# apt_cacher_expire_start_trade_off: 500m
+# apt_cacher_network_timeout: 60
+
+# Pass through all HTTPS requests
+apt_cacher_pass_through_pattern: "^.*:443$"
+
+# 1MB
+# apt_cacher_reserve_space: 1048576

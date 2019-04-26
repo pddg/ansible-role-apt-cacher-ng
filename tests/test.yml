@@ -1,0 +1,12 @@
+---
+- hosts: all
+  become: yes
+  roles:
+    # Server and client
+    - name: ../../.
+      vars:
+        apt_cacher_server: yes
+    # Client only
+    - name: ../../.
+      vars:
+        apt_cacher_server: no

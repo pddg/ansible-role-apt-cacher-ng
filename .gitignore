@@ -1,0 +1,5 @@
+.vagrant
+*.log
+tests/*
+!tests/*.yml
+.DS_Store

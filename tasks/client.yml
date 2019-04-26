@@ -1,0 +1,8 @@
+---
+- name: Proxy was setup
+  template:
+    src: 'templates/01proxy.j2'
+    dest: '/etc/apt/apt.conf.d/01proxy'
+    owner: root
+    group: root
+    mode: 0644

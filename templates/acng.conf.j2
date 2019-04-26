@@ -1,0 +1,56 @@
+# {{ ansible_managed }}
+# Where to cache
+CacheDir: {{ apt_cacher_cache_dir }}
+
+# Where to logging
+LogDir: {{ apt_cacher_log_dir }}
+
+# A place to look for additional configuration
+SupportDir: {{ apt_cacher_support_dir }}
+
+# Lisening port
+Port: {{ apt_cacher_port }}
+
+# Remap configurations
+Remap-debrep: file:deb_mirror*.gz /debian ; file:backends_debian # Debian Archives
+Remap-uburep: file:ubuntu_mirrors /ubuntu ; file:backends_ubuntu # Ubuntu Archives
+Remap-cygwin: file:cygwin_mirrors /cygwin # ; file:backends_cygwin # incomplete, please create this file or specify preferred mirrors here
+Remap-sfnet:  file:sfnet_mirrors # ; file:backends_sfnet # incomplete, please create this file or specify preferred mirrors here
+Remap-alxrep: file:archlx_mirrors /archlinux # ; file:backend_archlx # Arch Linux
+Remap-fedora: file:fedora_mirrors # Fedora Linux
+Remap-epel:   file:epel_mirrors # Fedora EPEL
+Remap-slrep:  file:sl_mirrors # Scientific Linux
+Remap-gentoo: file:gentoo_mirrors.gz /gentoo ; file:backends_gentoo # Gentoo Archives
+ReportPage: acng-report.html
+
+# Enable debug logging
+{%- if apt_cacher_debug %}
+VerboseLog: 1
+{%- endif %}
+
+# Days before considering an unreferenced file expired (to be deleted).
+ExThreshold: {{ apt_cacher_expire_threshold }}
+
+# Cache capacity
+{%- if apt_cacher_expire_start_trade_off is defined %}
+ExStartTradeOff: {{ apt_cacher_expire_start_trade_off }}
+{%- endif %}
+
+# Timeout of out going requests
+{%- if apt_cacher_network_timeout is defined %}
+NetworkTimeout: {{ apt_cacher_network_timeout }}
+{%- endif %}
+
+LocalDirs: acng-doc /usr/share/doc/apt-cacher-ng
+
+# Don't cache request if the requests match this pattern.
+PassThroughPattern: {{ apt_cacher_pass_through_pattern }}
+
+# Controls preallocation of file system space
+# This might reduce disk fragmentation and therefore improve later read
+# performance. However, write performance can be reduced which could be
+# exploited by malicious users.
+{%- if apt_cacher_reserve_space is defined %}
+ReserveSpace: {{ apt_cacher_reserve_space }}
+{%- endif %}
+

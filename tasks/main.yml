@@ -1,0 +1,6 @@
+- include_tasks: server.yml
+  when: apt_cacher_server
+
+- include_tasks: client.yml
+  when: apt_cacher_client
+

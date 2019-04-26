@@ -1,0 +1,20 @@
+---
+- name: apt-cacher-ng was installed
+  apt:
+    name:
+      - apt-cacher-ng
+    cache_valid_time: 3600
+
+- name: acng.conf was up-to-date
+  template:
+    src: 'templates/acng.conf.j2'
+    dest: '/etc/apt-cacher-ng/acng.conf'
+    owner: root
+    group: root
+    mode: 0644
+  notify: Restart apt-cacher-ng
+
+- name: apt-cacher-ng was started
+  service:
+    name: apt-cacher-ng
+    state: started

@@ -30,10 +30,12 @@ Example Playbook
     - name: pddg.apt_cacher_ng
       vars:
         apt_cacher_server: yes
+        apt_cacher_server_fqdn: example.com
     # Client only
     - name: pddg.apt_cacher_ng
       vars:
         apt_cacher_server: no
+        apt_cacher_server_fqdn: example.com
 ```
 
 License
